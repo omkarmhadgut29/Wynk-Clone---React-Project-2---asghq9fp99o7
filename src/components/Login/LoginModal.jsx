@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createUser, userSelector } from "../../redux/users/userSlice";
 import Swal from "sweetalert2";
 import axios from "axios";
+import loginImg from "../../../public/assets/images/login.png";
 
 const LoginModal = ({ open, handleModal }) => {
     // const [open, setOpen] = useState(false);
@@ -226,8 +227,10 @@ const LoginModal = ({ open, handleModal }) => {
                 <Box className=" inline-block text-white w-full max-w-3xl sm:w-auto overflow-hidden text-left align-middle transition-all transform shadow-xl rounded-2xl opacity-100 scale-100 ">
                     <Box className="grid grid-cols-7 md:grid-cols-12 md:h-[500px] ">
                         <Box
-                            className={` hidden md:block col-span-5 w-full bg-[url('../../../public/assets/images/login.png')] bg-no-repeat h-full bg-cover `}
+                            className={` hidden md:block col-span-5 w-full bg-no-repeat h-full bg-cover `}
+                            sx={{ backgroundImage: `url(${loginImg})` }}
                         ></Box>
+                        {/* bg-[url('../../../public/assets/images/login.png')] */}
                         {/* bg-[url('assets/images/login.png')] */}
 
                         <Box className=" bg-[#21252d] col-span-7 ">
