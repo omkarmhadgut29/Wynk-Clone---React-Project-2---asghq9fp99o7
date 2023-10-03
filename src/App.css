@@ -3,6 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  background-color: #0c0f12;
+}
+
 /* #root {
   max-width: 1280px;
   margin: 0 auto;

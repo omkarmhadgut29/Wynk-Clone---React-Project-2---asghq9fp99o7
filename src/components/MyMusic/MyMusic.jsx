@@ -85,7 +85,7 @@ const MyMusic = () => {
     }, [changeNavigate]);
     return (
         <>
-            <Box className="h-full min-h-[450px] ">
+            <Box className="h-full min-h-[450px] pt-[30px] mb-[47px] ">
                 {isEmptySongs ? (
                     <>
                         <EmptyLikedSongs />
