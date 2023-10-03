@@ -27,8 +27,7 @@ const PlayerPage = () => {
     return (
         <>
             {songs.length > 0 ? (
-                <Box className="container-layout mt-9 text-white  ">
-                    {/* min-h-[68vh] */}
+                <Box className="container-layout mt-[100px] text-white min-h-[60vh] ">
                     <Box className="block md:flex flex-wrap justify-center ">
                         <Box className="flex md:block md:w-3/12 items-center ">
                             <MusicImage />
