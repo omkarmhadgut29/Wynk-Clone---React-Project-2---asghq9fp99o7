@@ -1,6 +1,7 @@
 # Wynk Clone - React Project
 
-![Wynk Clone Logo](./public/assets/logo/logo.png)
+<!-- ![Wynk Clone Logo](./public/assets/logo/logo.png) -->
+<img src="./public/assets/logo/logo.png" alt="Wynk Clone Logo" width="24" height="24">
 
 ## Introduction
 
