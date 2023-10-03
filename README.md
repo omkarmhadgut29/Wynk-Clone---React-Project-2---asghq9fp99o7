@@ -1,7 +1,6 @@
 # Wynk Clone - React Project
 
-<!-- ![Wynk Clone Logo](./public/assets/logo/logo.png) -->
-<img src="./public/assets/logo/logo.png" alt="Wynk Clone Logo" width="24" height="24">
+<img src="./public/assets/logo/logo.png" alt="Wynk Clone Logo" width="50" height="50">
 
 ## Introduction
 
@@ -12,28 +11,25 @@ This repository contains the code for a Wynk Clone, a music streaming web applic
 ## Project Images
 
 -   Home Page:
-    ![Home Page](https://your-image-url.com/home.png)
--   Search Page:
-    ![Search Page](https://your-image-url.com/search.png)
+    ![Home Page](./public/assets/project%20images/Home%20Screen.png)
 -   Playlist Management:
-    ![Playlist Management](https://your-image-url.com/playlists.png)
+    ![Search Page](./public/assets/project%20images/Playlist%20Management.png)
+-   My Music Page:
+    ![Playlist Management](./public/assets/project%20images/My%20Music.png)
+-   Subcription Page:
+    ![Playlist Management](./public/assets/project%20images/Subcription.png)
 
 ## Features
 
 -   **User Registration and Authentication**
 
     -   Users can create accounts or log in using their existing credentials.
-    -   Authentication is powered by Firebase for secure and seamless user management.
+    -   Authentication is powered by Newton School API for secure and seamless user management.
 
 -   **Browsing and Searching for Songs**
 
     -   Users can browse through a vast catalog of songs and albums.
-    -   A search feature allows users to find specific songs, artists, or albums quickly.
-
--   **Playlist Creation and Management**
-
-    -   Users can create custom playlists to organize their favorite songs.
-    -   Playlists can be named and customized with cover images.
+    -   A search feature allows users to find specific songs quickly.
 
 -   **Music Playback**
 
@@ -48,18 +44,13 @@ This repository contains the code for a Wynk Clone, a music streaming web applic
 -   **Discovering New Music**
 
     -   Users can explore trending songs and discover new releases.
-    -   This feature helps users stay up-to-date with the latest music trends.
-
--   **User Profile Management**
-    -   Users can view and edit their profiles, including their profile picture and username.
-    -   Profile information is stored securely in Firebase.
+    -   This feature helps users stay up-to-date with the
 
 ## Technologies Used
 
 -   React
 -   Redux for State Management
--   Firebase for User Authentication
--   CSS for Styling
+-   Tailwind CSS for Styling
 -   JavaScript for Logic
 
 ## Installation
@@ -84,21 +75,18 @@ cd Wynk-Clone---React-Project-2---asghq9fp99o7
 npm install
 ```
 
-4. Create a Firebase project and set up Firebase Authentication. Replace the Firebase configuration in the `src/firebase.js` file with your own Firebase configuration.
-
-5. Start the development server:
+4. Start the development server:
 
 ```bash
 npm start
 ```
 
-6. Open your web browser and visit `http://localhost:3000` to see the Wynk Clone app running locally.
+5. Open your web browser and visit `http://localhost:3000` to see the Wynk Clone app running locally.
 
 ## Usage
 
 -   Register or log in to your account.
 -   Explore the music catalog and search for songs.
--   Create playlists and add songs to them.
 -   Play and manage your playlists.
 -   Like and dislike songs to personalize your recommendations.
 -   Enjoy listening to music!
@@ -126,8 +114,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 If you have any questions or need further assistance, feel free to contact the project owner:
 
--   Name: [Your Name]
--   Email: [Your Email Address]
+-   Name: Omkar Mhadgut
+-   Email: omkarmhadgut10@gmail.com
 
 You can also open an issue on this repository for any inquiries or problems you encounter.
 
