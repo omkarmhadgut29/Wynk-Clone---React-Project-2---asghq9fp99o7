@@ -1,8 +1,6 @@
 # Wynk Clone - React Project
 
-![Wynk Clone Logo](./assets/logo/logo.png)
-
-<!-- ![Wynk Clone Logo](https://your-image-url.com) -->
+![Wynk Clone Logo](./public/assets/logo/logo.png)
 
 ## Introduction
 
