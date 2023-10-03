@@ -1,0 +1,21 @@
+.card_form input {
+    background: #fafafa;
+    border: 1px solid #1a1a1d;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    margin: 10px 0;
+    height: 48px;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    font-feature-settings: "ss01" on;
+    color: #1a1a1d;
+}
+
+.error_box {
+    border: 1px solid #d92d20 !important;
+}

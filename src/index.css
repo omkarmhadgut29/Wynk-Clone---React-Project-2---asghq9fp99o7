@@ -1,3 +1,57 @@
+body {
+  background-color: #0c0f12;
+}
+
+.container-layout {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem
+}
+
+@media (min-width:768px) {
+  .container-layout {
+    padding-left: 2rem;
+    padding-right: 2rem
+  }
+}
+
+@media (min-width:1280px) {
+  .container-layout {
+    width: 86%;
+    padding-left: 0;
+    padding-right: 0
+  }
+}
+
+.shadow-dark {
+  --tw-shadow: 0 4px 10px 0 rgba(0, 0, 0, .16);
+  --tw-shadow-colored: 0 4px 10px 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.react-multiple-carousel__arrow {
+  z-index: 0;
+  /* Override the z-index property */
+}
+
+.top-bg {
+  width: 100%;
+  background: rgb(31, 39, 43);
+  text-align: center;
+  position: relative;
+  padding: 10px;
+  box-sizing: border-box;
+  clip-path: ellipse(100% 75% at 50% 15%);
+  /* margin: 0px auto; */
+  height: 230px;
+}
+
+/* .MuiSlider-thumb {
+  display: none;
+} */
+
 /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

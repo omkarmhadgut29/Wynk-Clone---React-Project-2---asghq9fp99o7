@@ -1,0 +1,122 @@
+.beforeCss::before {
+    content: "-";
+    display: block;
+    line-height: 1em;
+    color: transparent;
+}
+
+.table-wraper table td {
+    line-height: 200%;
+    color: rgb(190, 193, 194);
+    font-size: 14px;
+}
+
+.table-wraper table td .subscription {
+    font-size: 24px !important;
+}
+
+.table-wraper table td img {
+    margin: auto;
+}
+
+.plans-cards {
+    width: 110px;
+    height: 120px;
+    background: rgb(21, 26, 31);
+    display: flex;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    box-sizing: border-box;
+    border-radius: 8px;
+    position: relative;
+    cursor: pointer;
+    margin: 5px 0px;
+}
+
+.plans-cards img {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+}
+
+.selected-cards {
+    border: 2px solid rgb(235, 29, 34);
+    color: rgb(222, 222, 222);
+    width: 120px;
+    height: 130px;
+}
+
+.not-selected-cards {
+    border: 1px solid rgb(31, 39, 43);
+    color: rgb(190, 193, 194);
+}
+
+.best__value {
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 6px;
+    color: rgb(255, 255, 255);
+    box-sizing: border-box;
+    border-radius: 4px;
+    position: absolute;
+    bottom: -12px;
+    background: rgb(235, 29, 34);
+    font-size: 10px;
+}
+
+.plans-cards .period {
+    font-weight: bold;
+    margin-bottom: 2px;
+    font-size: 14px;
+}
+
+.plans-cards .price {
+    font-weight: bold;
+    margin-bottom: 2px;
+    font-size: 18px;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.plans-cards .price .original-price {
+    text-decoration: line-through;
+    margin: 2px;
+    color: rgb(157, 160, 163);
+    font-size: 14px;
+}
+
+.plans-cards .price .paybale-price {
+    margin: 2px;
+}
+
+.amount-to-pay {
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    padding: 10px 20px;
+    -webkit-box-align: center;
+    align-items: center;
+    position: fixed;
+    bottom: 0px;
+    box-sizing: border-box;
+    background: rgb(31, 39, 43);
+    width: 55%;
+    left: 22.5%;
+}
+
+.amount-to-pay button {
+    background: rgb(2, 136, 209);
+    border-radius: 8px;
+    padding: 13px 42px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+}
