@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createUser, userSelector } from "../../redux/users/userSlice";
 import Swal from "sweetalert2";
 import axios from "axios";
-import loginImg from "../../../public/assets/images/login.png";
+import loginImg from "../../assets/images/login.png";
 
 const LoginModal = ({ open, handleModal }) => {
     // const [open, setOpen] = useState(false);
