@@ -18,6 +18,7 @@ import PlayerPage from "./components/MusicPlayer/PlayerPage";
 import PlayMusic from "./components/PlayMusic/PlayMusic";
 import { useDispatch, useSelector } from "react-redux";
 import {
+    addAlbumArtists,
     addSongIndex,
     addSongs,
     setLikedSongs,
@@ -63,6 +64,13 @@ function App() {
                     isLikedSongs = JSON.parse(
                         localStorage.getItem("isLikedSongs")
                     );
+                }
+
+                if (JSON.parse(localStorage.getItem("albumArtists"))) {
+                    const albumArtists = JSON.parse(
+                        localStorage.getItem("albumArtists")
+                    );
+                    dispatch(addAlbumArtists(albumArtists));
                 }
                 dispatch(addSongs(JSON.parse(localStorage.getItem("songs"))));
                 dispatch(

@@ -16,6 +16,7 @@ import { Box, Slider } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+    albumArtistsSelector,
     currentSongIndexSelector,
     decrementSongIndex,
     incrementSongIndex,
@@ -31,6 +32,7 @@ const PlayMusic = () => {
     const songs = useSelector(songSelector);
     const currSongInd = useSelector(currentSongIndexSelector);
     const isLikedSongs = useSelector(isLikedSongsSelector);
+    const albumArtists = useSelector(albumArtistsSelector);
     const isSubscriptionPage = useSelector(isSubscriptionPageSelector);
     const dispatch = useDispatch();
 
@@ -244,6 +246,15 @@ const PlayMusic = () => {
                                                   10
                                               )
                                             : "----"
+                                        : albumArtists?.length > 0
+                                        ? currSong.artist.map((artistId) => {
+                                              const artist = albumArtists.find(
+                                                  (a) => a._id === artistId
+                                              );
+                                              return artist
+                                                  ? artist.name + " | "
+                                                  : "";
+                                          })
                                         : currSong.artist.map(
                                               (data) => `${data.name} | `
                                           )}

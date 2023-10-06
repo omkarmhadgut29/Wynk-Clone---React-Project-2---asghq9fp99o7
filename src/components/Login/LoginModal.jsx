@@ -8,21 +8,30 @@ import { createUser, userSelector } from "../../redux/users/userSlice";
 import Swal from "sweetalert2";
 import axios from "axios";
 import loginImg from "../../assets/images/login.png";
+import UpdatePassword from "./UpdatePassword";
 
-const LoginModal = ({ open, handleModal }) => {
+const LoginModal = ({
+    open,
+    handleModal,
+    isUpdatePassword,
+    setIsUpdatePassword,
+}) => {
     // const [open, setOpen] = useState(false);
     const [isSignUp, setIsSignUp] = useState(false);
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [passwordCurrent, setPasswordCurrent] = useState("");
     const [isError, setIsError] = useState({
         username: "",
         email: "",
         password: "",
+        passwordCurrent: "",
     });
 
     const dispatch = useDispatch();
-    // const userData = useSelector(userSelector);
+    const userData = useSelector(userSelector);
+    const token = userData?.token;
 
     const emailOnchange = (inputEmail) => {
         // validator.isEmail(inputEmail)
@@ -38,14 +47,6 @@ const LoginModal = ({ open, handleModal }) => {
             }));
         }
         setEmail(inputEmail);
-    };
-
-    const signUpUser = (user) => {
-        // console.log("Sign Up User", user);
-    };
-
-    const loginUser = (user) => {
-        // console.log("login User", user);
     };
 
     const userAuth = async (userDetails, operation) => {
@@ -65,12 +66,22 @@ const LoginModal = ({ open, handleModal }) => {
         if (operation === "login") {
             url = `https://academics.newtonschool.co/api/v1/user/login`;
         }
+        if (operation === "updatePassword") {
+            url = `https://academics.newtonschool.co/api/v1/user/updateMyPassword`;
+        }
+
+        const headersObj = {
+            projectId: projectId,
+        };
+        if (isUpdatePassword) {
+            headersObj["Authorization"] = `Bearer ${token}`;
+        }
 
         const response = await axios({
             url: url,
-            method: "post",
+            method: isUpdatePassword ? "PATCH" : "post",
             headers: {
-                projectId: projectId,
+                ...headersObj,
                 "Content-Type": "application/json",
             },
             data: {
@@ -94,13 +105,22 @@ const LoginModal = ({ open, handleModal }) => {
             operation = "signup";
             // signUpUser(data);
         }
+        if (isUpdatePassword) {
+            data["name"] = username;
+            data["password"] = password;
+            data["passwordCurrent"] = passwordCurrent;
+            operation = "updatePassword";
+        }
         // console.log("data");
         // console.log(data);
 
-        // dispatch(userAuth(data, operation));
         const response = await userAuth(data, operation).catch((error) => {
             return { status: error.response.status, response: error.response };
         });
+
+        if (isUpdatePassword) {
+            setIsUpdatePassword(false);
+        }
         handleModal();
         // console.log(response);
         if (response.status === 200 || response.status === 201) {
@@ -113,6 +133,8 @@ const LoginModal = ({ open, handleModal }) => {
                     "success"
                 );
                 // handleModal();
+            } else if (isUpdatePassword) {
+                Swal.fire("Successful", "Password has been updated", "success");
             } else {
                 dispatch(createUser(response.data));
                 Swal.fire("Success", "Login successful", "success");
@@ -129,6 +151,9 @@ const LoginModal = ({ open, handleModal }) => {
     };
 
     const validateStates = () => {
+        if (isUpdatePassword && passwordCurrent === "") {
+            return false;
+        }
         if (
             isSignUp &&
             username != "" &&
@@ -238,7 +263,11 @@ const LoginModal = ({ open, handleModal }) => {
 
                             <Box className="m-6 mb-3 min-[370px]:m-12 min-[370px]:mb-8 ">
                                 <Box className="text-2xl font-medium mb-2 ">
-                                    {isSignUp ? "Sign Up" : "Login"}
+                                    {isSignUp
+                                        ? "Sign Up"
+                                        : isUpdatePassword
+                                        ? "Update Password"
+                                        : "Login"}
                                 </Box>
                                 <Typography
                                     component={"p"}
@@ -247,20 +276,31 @@ const LoginModal = ({ open, handleModal }) => {
                                     Get a personalised experience, and access
                                     all your music
                                 </Typography>
-                                <Box className="mb-2 flex items-center text-[#d0d6d8] ">
-                                    <IOSSwitch sx={{ m: 1 }} />
-                                    <Typography
-                                        component={"p"}
-                                        className="text-[14px] "
-                                    >
-                                        Toggle to{" "}
-                                        {isSignUp ? "Login" : "Sign Up"}
-                                    </Typography>
-                                </Box>
+
+                                {!isUpdatePassword && (
+                                    <>
+                                        <Box className="mb-2 flex items-center text-[#d0d6d8] ">
+                                            <IOSSwitch sx={{ m: 1 }} />
+                                            <Typography
+                                                component={"p"}
+                                                className="text-[14px] "
+                                            >
+                                                Toggle to{" "}
+                                                {isSignUp ? "Login" : "Sign Up"}
+                                            </Typography>
+                                        </Box>
+                                    </>
+                                )}
                                 {/* <form
-                                action={(e) => handleSubmit(e)}
-                                method="post" > */}
-                                <Box className={isSignUp ? "block" : "hidden"}>
+                                    action={(e) => handleSubmit(e)}
+                                    method="post" > */}
+                                <Box
+                                    className={
+                                        isSignUp || isUpdatePassword
+                                            ? "block"
+                                            : "hidden"
+                                    }
+                                >
                                     <input
                                         type="name"
                                         className="p-2 w-full max-[370px]:w-56 rounded-md bg-black border-[1px] border-black focus-visible:outline-none "
@@ -301,11 +341,39 @@ const LoginModal = ({ open, handleModal }) => {
                                         {isError.email}
                                     </Box>
                                 </Box>
+                                {isUpdatePassword && (
+                                    <Box className="mt-4">
+                                        <input
+                                            type="password"
+                                            className="p-2 w-full max-[370px]:w-56 rounded-md bg-black border-[1px] border-black focus-visible:outline-none mobile-input_loginInput__ZJULr"
+                                            placeholder={`Enter Old Password `}
+                                            value={passwordCurrent}
+                                            onChange={(e) =>
+                                                setPasswordCurrent(
+                                                    e.target.value
+                                                )
+                                            }
+                                        />
+                                        <Box
+                                            className={`text-[#f2a222] text-sm mt-1 ${
+                                                isError.passwordCurrent === ""
+                                                    ? "hidden"
+                                                    : "block"
+                                            } `}
+                                        >
+                                            {isError.passwordCurrent}
+                                        </Box>
+                                    </Box>
+                                )}
                                 <Box className="mt-4">
                                     <input
                                         type="password"
                                         className="p-2 w-full max-[370px]:w-56 rounded-md bg-black border-[1px] border-black focus-visible:outline-none mobile-input_loginInput__ZJULr"
-                                        placeholder="Enter Password"
+                                        placeholder={`${
+                                            isUpdatePassword
+                                                ? "Enter New Password"
+                                                : "Enter Password"
+                                        } `}
                                         value={password}
                                         onChange={(e) =>
                                             setPassword(e.target.value)
@@ -324,7 +392,7 @@ const LoginModal = ({ open, handleModal }) => {
                                 <Box className="mt-4 flex">
                                     <button
                                         type="submit"
-                                        className={`inline-flex w-28 justify-center py-2 px-4 text-sm leading-5 font-[500]text-white  border-[#ed1c24] border-[1px] rounded-full ${
+                                        className={`inline-flex min-w-[114px] justify-center py-2 px-4 text-sm leading-5 font-[500]text-white  border-[#ed1c24] border-[1px] rounded-full ${
                                             validateStates()
                                                 ? "bg-[#ed1c24]"
                                                 : "bg-red-800 cursor-not-allowed"
@@ -333,7 +401,11 @@ const LoginModal = ({ open, handleModal }) => {
                                         disabled={!validateStates()}
                                     >
                                         {/* bg-[#ed1c24] */}
-                                        {isSignUp ? "Sign Up" : "Login"}
+                                        {isSignUp
+                                            ? "Sign Up"
+                                            : isUpdatePassword
+                                            ? "Update Password"
+                                            : "Login"}
                                     </button>
                                 </Box>
                                 {/* </form> */}

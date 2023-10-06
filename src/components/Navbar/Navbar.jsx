@@ -18,7 +18,14 @@ import {
 } from "@mui/material";
 import "./Navbar.css";
 import PropTypes from "prop-types";
-import { LibraryMusic, Login, Logout, Menu, Search } from "@mui/icons-material";
+import {
+    LibraryMusic,
+    Login,
+    Logout,
+    Menu,
+    Search,
+    Upgrade,
+} from "@mui/icons-material";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import LoginModal from "../Login/LoginModal";
 import { useDispatch, useSelector } from "react-redux";
@@ -38,6 +45,7 @@ function Navbar(props) {
     const { window } = props;
     const [mobileOpen, setMobileOpen] = useState(false);
     const [openModal, setOpenModal] = useState(false);
+    const [isUpdatePassword, setIsUpdatePassword] = useState(false);
     const [isNavigate, setIsNavigate] = useState(false);
 
     const [searchText, setSearchText] = useState(false);
@@ -69,6 +77,9 @@ function Navbar(props) {
     }, [location.pathname]);
 
     const handleModal = () => {
+        if (openModal && isUpdatePassword) {
+            setIsUpdatePassword(false);
+        }
         setOpenModal((prev) => !prev);
     };
 
@@ -310,7 +321,7 @@ function Navbar(props) {
                             className={` block ${
                                 user ? "" : "lg:hidden "
                             } h-full text-white`}
-                            onClick={handleDrawerToggle}
+                            onClick={() => handleDrawerToggle()}
                         >
                             <div
                                 className="relative h-full flex items-center"
@@ -405,12 +416,58 @@ function Navbar(props) {
                                             </div>
                                         </span>
                                     </Box>
+                                </Box>
+                            )}
 
-                                    <Box className="full flex justify-center">
-                                        <hr className="w-full h-[0.045rem] border-0 opacity-20 my-4 bg-[#f5f5f5] " />
+                            {user && (
+                                <Box
+                                    className="flex flex-col px-4 mt-8 "
+                                    onClick={() => {
+                                        setIsUpdatePassword(true);
+                                        handleModal();
+                                        handleDrawerToggle();
+                                    }}
+                                >
+                                    <Box className="flex items-center gap-3 hover:opacity-60">
+                                        <span className="hover:opacity-60 cursor-pointer flex ">
+                                            {/* <span className="text-[#fdfdfd] ">
+                                                <span>
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        width="24"
+                                                        height="24"
+                                                        viewBox="0 0 24 24"
+                                                        fill="none"
+                                                    >
+                                                        <path
+                                                            d="M12 15C15.3137 15 18 12.3137 18 9C18 5.68629 15.3137 3 12 3C8.68629 3 6 5.68629 6 9C6 12.3137 8.68629 15 12 15Z"
+                                                            stroke="currentColor"
+                                                            strokeWidth="1.5"
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                        ></path>
+                                                        <path
+                                                            d="M2.90625 20.2508C3.82775 18.6544 5.15328 17.3287 6.74958 16.407C8.34588 15.4853 10.1567 15 12 15C13.8433 15 15.6541 15.4853 17.2504 16.407C18.8467 17.3287 20.1722 18.6544 21.0938 20.2508"
+                                                            stroke="currentColor"
+                                                            strokeWidth="1.5"
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                        ></path>
+                                                    </svg>
+                                                </span>
+                                            </span> */}
+                                            <Upgrade className="text-[#fdfdfd] text-[24px] " />
+                                            <div className=" ml-2 font-light text-[#fdfdfd] ">
+                                                {/* {user} */}
+                                                Update Password
+                                            </div>
+                                        </span>
                                     </Box>
                                 </Box>
                             )}
+                            <Box className="full flex justify-center">
+                                <hr className="w-full h-[0.045rem] border-0 opacity-20 my-4 bg-[#f5f5f5] " />
+                            </Box>
 
                             {/* Manage Subscription */}
                             <Box
@@ -591,8 +648,28 @@ function Navbar(props) {
                     </Drawer>
                 </Box> */}
             </Box>
-            {openModal && (
-                <LoginModal open={openModal} handleModal={handleModal} />
+            {
+                openModal && (
+                    //     isUpdatePassword ? (
+                    //     <LoginModal
+                    //         open={openModal}
+                    //         handleModal={handleModal}
+                    //         isUpdatePassword={isUpdatePassword}
+                    //         setIsUpdatePassword={setIsUpdatePassword}
+                    //     />
+                    // ) : (
+                    //     <LoginModal
+                    //         open={openModal}
+                    //         handleModal={handleModal}
+                    //     />
+                    // )
+                    <LoginModal
+                        open={openModal}
+                        handleModal={handleModal}
+                        isUpdatePassword={isUpdatePassword}
+                        setIsUpdatePassword={setIsUpdatePassword}
+                    />
+                )
                 // <Modal
                 //     open={open}
                 //     onClose={handleModal}
@@ -604,7 +681,7 @@ function Navbar(props) {
                 //         Hi
                 //     </Box>
                 // </Modal>
-            )}
+            }
         </>
     );
 }

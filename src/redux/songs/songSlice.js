@@ -10,6 +10,7 @@ const initialState = {
     currentSongIndex: 0,
     isPlaying: false,
     isLikedSongs: false,
+    albumArtists: null,
 };
 
 // export const getSongs = createAsyncThunk("getSongs", async () => {
@@ -89,6 +90,17 @@ const songSlice = createSlice({
         playSong: (state) => {
             state.isPlaying = true;
         },
+        addAlbumArtists: (state, action) => {
+            state.albumArtists = action.payload;
+            localStorage.setItem(
+                "albumArtists",
+                JSON.stringify(action.payload)
+            );
+        },
+        deleteAlbumArtists: (state) => {
+            state.albumArtists = [];
+            localStorage.removeItem("albumArtists");
+        },
     },
 });
 
@@ -102,6 +114,8 @@ export const {
     updateSongs,
     deleteSongs,
     setLikedSongs,
+    addAlbumArtists,
+    deleteAlbumArtists,
 } = songSlice.actions;
 
 export const songSelector = createSelector(
@@ -121,6 +135,11 @@ export const currentSongIndexSelector = createSelector(
 
 export const isPlayingSelector = createSelector(
     (state) => state.songs.isPlaying,
+    (state) => state
+);
+
+export const albumArtistsSelector = createSelector(
+    (state) => state.songs.albumArtists,
     (state) => state
 );
 

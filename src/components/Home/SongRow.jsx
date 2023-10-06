@@ -7,8 +7,11 @@ import "react-multi-carousel/lib/styles.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {
+    addAlbumArtists,
     addSongIndex,
     addSongs,
+    albumArtistsSelector,
+    deleteAlbumArtists,
     deleteSongs,
     playSong,
     updateSongs,
@@ -77,6 +80,7 @@ const SongRow = ({ title, isAlbum = false }) => {
             // console.log(data[index]);
             // console.log(data[index].songs);
             const artists = data[index].artists;
+            dispatch(addAlbumArtists(artists));
             // console.log(artists);
             dispatch(addSongs(data[index].songs));
             dispatch(addSongIndex(0));
@@ -105,12 +109,14 @@ const SongRow = ({ title, isAlbum = false }) => {
                     // console.log(await response.data.data);
                     dispatch(updateSongs(response.data.data));
                 });
+                dispatch(deleteAlbumArtists());
                 dispatch(addSongIndex(0));
                 setSongIndex(index);
                 setChangeNavigate(true);
             } else {
                 // console.log(`data: `);
                 // console.log(data);
+                dispatch(deleteAlbumArtists());
                 dispatch(addSongs(data));
                 dispatch(addSongIndex(index));
                 dispatch(playSong());
